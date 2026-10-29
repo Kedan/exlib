@@ -52,6 +52,7 @@ target_include_directories(${MOD_NAME}
 
 target_include_directories(${APP_NAME}
 	PUBLIC
+	submodule/nudny-main/include
 	include
 )
 

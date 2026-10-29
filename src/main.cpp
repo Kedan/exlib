@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include <nudny/baseline/baseline.hpp>
-#include <exlib/main.hpp>
+#include <main.hpp>
 
 namespace exlib {
 	bool Main::isRunning() { return m_IsRunning; }
@@ -24,5 +24,5 @@ int main(int argc, char* argv[]) {
 	std::cout << "Exlib\nVersion: " << b.version << "\n";
 
 	exlib::Main app;
-	return app.execute();
+	return app.exe();
 }
