@@ -1,0 +1,12 @@
+[submodule "submodule/nudny-main"]
+	path = submodule/nudny-main
+	url = https://github.com/Kedan/nudny-main.git
+[submodule "submodule/nudny-util"]
+	path = submodule/nudny-util
+	url = https://github.com/Kedan/nudny-util.git
+[submodule "submodule/nudny-cmd"]
+	path = submodule/nudny-cmd
+	url = https://github.com/Kedan/nudny-cmd.git
+[submodule "submodule/nudny-fio"]
+	path = submodule/nudny-fio
+	url = https://github.com/Kedan/nudny-fio.git
