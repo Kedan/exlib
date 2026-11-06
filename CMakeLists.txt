@@ -38,20 +38,26 @@ enable_testing()
 
 add_library(${MOD_NAME}
 	src/${MOD_DIR}/exlib.cpp
+	submodule/nudny-cmd/src/nudny/cmd/cli_parser.cpp
 )
 
 add_executable(${APP_NAME} 
 	src/${MOD_DIR}/exlib.cpp
+	submodule/nudny-cmd/src/nudny/cmd/cli_parser.cpp
 	src/main.cpp
 )
 
 target_include_directories(${MOD_NAME}
 	PUBLIC
 	include
+	submodule/nlohmann/include
+	submodule/nudny-main/include
+	submodule/nudny-cmd/include
 )
 
 target_include_directories(${APP_NAME}
 	PUBLIC
+	submodule/nlohmann/include
 	submodule/nudny-main/include
 	submodule/nudny-cmd/include
 	include
