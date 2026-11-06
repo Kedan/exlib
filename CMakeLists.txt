@@ -21,7 +21,7 @@ option(ENABLE_CLANG_TIDY "Enable clang-tidy" OFF)
 
 project(${MOD_NAME} VERSION ${MOD_VERSION} DESCRIPTION ${MOD_DESCRIPTION} LANGUAGES CXX)
 
-add_custom_target(coverage
+add_custom_target(${APP_NAME}_coverage
 	COMMAND ${CMAKE_CTEST_COMMAND} -V --preset coverage
 	COMMAND ${CMAKE_SOURCE_DIR}/scripts/gencov.sh ${CMAKE_BINARY_DIR}
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -38,31 +38,48 @@ enable_testing()
 
 add_library(${MOD_NAME}
 	src/${MOD_DIR}/exlib.cpp
-	submodule/nudny-cmd/src/nudny/cmd/cli_parser.cpp
+	#submodule/nudny-cmd/src/nudny/cmd/cli_parser.cpp
 )
 
 add_executable(${APP_NAME} 
 	src/${MOD_DIR}/exlib.cpp
-	submodule/nudny-cmd/src/nudny/cmd/cli_parser.cpp
+	#submodule/nudny-cmd/src/nudny/cmd/cli_parser.cpp
 	src/main.cpp
 )
 
 target_include_directories(${MOD_NAME}
 	PUBLIC
 	include
-	submodule/nlohmann/include
-	submodule/nudny-main/include
-	submodule/nudny-cmd/include
+	#submodule/nlohmann/include
+	#submodule/nudny-main/include
+	#submodule/nudny-cmd/include
 )
 
 target_include_directories(${APP_NAME}
 	PUBLIC
-	submodule/nlohmann/include
-	submodule/nudny-main/include
-	submodule/nudny-cmd/include
+	#submodule/nlohmann/include
+	#submodule/nudny-main/include
+	#submodule/nudny-cmd/include
 	include
 )
 
+add_subdirectory(submodule/nlohmann)
+add_subdirectory(submodule/nudny-main)
+add_subdirectory(submodule/nudny-cmd)
+
+target_link_libraries(${MOD_NAME}
+	PRIVATE
+	nlohmann_json::nlohmann_json
+	nudny::main
+	nudny::cmd
+)
+
+target_link_libraries(${APP_NAME}
+	PRIVATE
+	nlohmann_json::nlohmann_json
+	nudny::main
+	nudny::cmd
+)
 if(ENABLE_CLANG_TIDY)
 	set_property(TARGET ${MOD_NAME} PROPERTY CXX_CLANG_TIDY clang-tidy)
 	set_property(TARGET ${APP_NAME} PROPERTY CXX_CLANG_TIDY clang-tidy)
