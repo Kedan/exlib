@@ -12,7 +12,10 @@ namespace exlib {
 	void Main::handleEvents() {
 		std::cout << "Handle Events\n";
 
-		if(cmd.cli("mode") == "interactive") {
+		if(parser.exist("mode")) {
+			if(cmd.cli("mode") == "i") {
+				std::cout << "Interactive mode\n"; 
+			}
 		} else {
 			if(cmd.cli("add") == "book") {
 				std::cout << "Add Book\n";
